@@ -1,12 +1,8 @@
 require "./scale-finder"
 
 # app will show scales related to notes
-describe NaturalNotes do
-    describe ".add" do
-        context "given empty string" do
-            it "returns zero" do
-                expect(NaturalNotes.add("")).to eq (0)
-            end
-        end
+describe natural_notes do
+    it 'should give value of index' do
+        allow(natural_notes[0]).to receive(:gets).and_return("A")
     end
 end
