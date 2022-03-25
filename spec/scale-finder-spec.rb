@@ -6,3 +6,8 @@ describe natural_notes do
         allow(natural_notes[0]).to receive(:gets).and_return("A")
     end
 end
+
+ describe all_notes do
+    it
+    end
+end
