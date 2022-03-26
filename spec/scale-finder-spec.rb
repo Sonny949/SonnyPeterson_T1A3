@@ -8,6 +8,7 @@ describe natural_notes do
 end
 
  describe all_notes do
-    it
+    it "should be 12 in length" do
+        expect(all_notes.length).to be(12)
     end
 end
