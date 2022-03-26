@@ -21,16 +21,18 @@ class Scale
 
     def initialize(root_note)
         @root_note = root_note
-        @whole = 2
-        @half = 1
+        @@whole = 2
+        @@half = 1
     end
+
 end
 
 class MajorScale < Scale
+    attr_reader :root_note
     def initialize(root_note)
         super(root_note, whole, half)
     end
 
-    # def major_scale
+    def major_scale(root)
     
 end

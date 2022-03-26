@@ -12,3 +12,9 @@ end
         expect(all_notes.length).to be(12)
     end
 end
+
+describe MajorScale do
+    it "should return 2 from whole" do
+    expect(whole).to receive(:gets).and_return("2")
+    end
+end
