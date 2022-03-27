@@ -14,25 +14,24 @@ every_note = []
 return every_note
 end
 # puts natural_notes
-puts all_notes
+# puts all_notes
 
-class Scale
-    attr_reader :root_note
 
-    def initialize(root_note)
-        @root_note = root_note
-        @@whole = 2
-        @@half = 1
+
+def major_scale(root_note)
+    major_scale = []
+    current_note_index = all_notes.index(root_note)
+    whole = 2
+    half = 1
+    [whole, whole, half, whole, whole, whole, half].each do |next_major_scale_step|
+        note_of_scale = all_notes[current_note_index]
+        major_scale << note_of_scale
+        next_major_scale_step.times do
+            current_note_index += 1
+            current_note_index = 0 if all_notes[current_note_index].nil?
+        end
     end
-
+    return major_scale
 end
 
-class MajorScale < Scale
-    attr_reader :root_note
-    def initialize(root_note)
-        super(root_note, whole, half)
-    end
-
-    def major_scale(root)
-    
-end
+puts major_scale("C")
