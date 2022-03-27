@@ -17,18 +17,18 @@ end
 # puts all_notes
 
 
-
-def major_scale(root_note)
+# show major scale for given root note. w stands for whole step, h stands for half step
+def major_scale(root)
     major_scale = []
-    current_note_index = all_notes.index(root_note)
-    whole = 2
-    half = 1
-    [whole, whole, half, whole, whole, whole, half].each do |next_major_scale_step|
-        note_of_scale = all_notes[current_note_index]
-        major_scale << note_of_scale
-        next_major_scale_step.times do
-            current_note_index += 1
-            current_note_index = 0 if all_notes[current_note_index].nil?
+    note_index = all_notes.index(root)
+    w = 2
+    h = 1
+    [w, w, h, w, w, w, h].each do |next_step_major|
+        scale_note = all_notes[note_index]
+        major_scale << scale_note
+        next_step_major.times do
+            note_index += 1
+            note_index = 0 if all_notes[note_index].nil?
         end
     end
     return major_scale
