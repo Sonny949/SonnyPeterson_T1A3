@@ -98,8 +98,8 @@ end
 # c = HarmonicMinorScale.new("C")
 # puts c.harmonic_minor_scale
 
-a = BluesScale.new("C")
+a = BluesScale.new("D")
 puts a.blues_scale
 
-# show major scale for given root note. w stands for whole step, h stands for half step
-# puts major_scale("D")
+# keys = ARGV.empty? ? ["C"] : ARGV
+# keys.each {|key| }
