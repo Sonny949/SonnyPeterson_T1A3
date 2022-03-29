@@ -16,7 +16,8 @@ end
 # puts natural_notes
 # puts all_notes
 
-# we will have three Scales, this master-class will define common variables. w stands for whole step, h stands for half step
+# we will have three Scales, this master-class will define common variables. w stands for whole step, h stands for half- 
+# step. I didn't use a special notation for 3 half steps because in music theory it is always noted as whole + half
 class Scale
     attr_reader :root
 
@@ -40,11 +41,13 @@ class MajorScale < Scale
     def major_scale
         major_scale = []
         note_index = all_notes.index(root)
+        # defined intervals for major scale
         [w, w, h, w, w, w, h].each do |next_step_major|
             scale_note = all_notes[note_index]
             major_scale << scale_note
             next_step_major.times do
                 note_index += 1
+                # loops back to start of array if reaches the end and has not satisfied the number of hops
                 note_index = 0 if all_notes[note_index].nil?
             end
         end
@@ -52,6 +55,7 @@ class MajorScale < Scale
     end
 end
 
+# show harmonic minor related to given note
 class HarmonicMinorScale < Scale
     attr_reader :root
 
@@ -70,6 +74,7 @@ class HarmonicMinorScale < Scale
     end
 end
 
+# show blues scale related to given note
 class BluesScale < Scale
     attr_reader :root
 
@@ -97,20 +102,4 @@ a = BluesScale.new("C")
 puts a.blues_scale
 
 # show major scale for given root note. w stands for whole step, h stands for half step
-# def major_scale(root)
-#     major_scale = []
-#     note_index = all_notes.index(root)
-#     w = 2
-#     h = 1
-#     [w, w, h, w, w, w, h].each do |next_step_major|
-#         scale_note = all_notes[note_index]
-#         major_scale << scale_note
-#         next_step_major.times do
-#             note_index += 1
-#             note_index = 0 if all_notes[note_index].nil?
-#         end
-#     end
-#     return major_scale
-# end
-
 # puts major_scale("D")
