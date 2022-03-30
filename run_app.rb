@@ -3,9 +3,7 @@ require 'tty-prompt'
 require 'tty-font'
 require 'colorize'
 require 'optparse'
-require_relative './menu'
 require_relative './scale_finder'
-require_relative './save_scale'
 
 # puts "Hello world"
 
@@ -70,12 +68,12 @@ class Selections
         puts "-"*61
     end
 
-    def save
-        puts @@new_scale
-        @prompt.select("Would you like to create a save file based on your array?", %w(yes no))
-
-
-    end
+    # def save_yes
+    #     puts @@new_scale
+    #     @prompt.select("Would you like to create a save file based on your array?", %w(yes no))
+    #         if "yes" then open = File.new('music.txt', 'w')
+    #     end
+    # end
 
     # def leave
         
@@ -84,5 +82,5 @@ end
 
 music = Selections.new
 music.select_scale
-music.save
+# music.save
 # prompt.select("Which note would you like to use?", Major Harmonic-Minor Blues))
