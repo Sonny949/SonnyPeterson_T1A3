@@ -36,7 +36,7 @@ end
 
 # gives the major scale for a given note
 class MajorScale < Scale
-    attr_reader :root
+    attr_accessor :root
 
     def major_scale
         major_scale = []
@@ -98,8 +98,8 @@ end
 # c = HarmonicMinorScale.new("C")
 # puts c.harmonic_minor_scale
 
-a = BluesScale.new("D")
-puts a.blues_scale
+# a = BluesScale.new("D")
+# puts a.blues_scale
 
 # keys = ARGV.empty? ? ["C"] : ARGV
 # keys.each {|key| }

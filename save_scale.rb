@@ -1,4 +1,4 @@
-require_relative './scale_finder.rb'
+require_relative './scale_finder'
 
 # saving notes based on output from scale_finder
 class SaveScale
