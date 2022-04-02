@@ -1,21 +1,30 @@
-#!/usr/bin/env ruby
 require 'tty-prompt'
 require 'tty-font'
-require 'colorize'
-require 'optparse'
 require_relative './scale_finder'
 
-# options = {}
-# OptionParser.new do |parser|
-#     parser.on("-n", "--name NAME", "The name of the person") do |value|
-#         options[:name] = value
-#     end
-#     end.parse!
-#     if options[:name]
-#         puts 'hello ' + options[:name]
-#     else
-#         puts 'hello stranger'
-#     end
+
+
+begin
+    parse = ARGV
+    case 
+    when (parse & ['-h', '--help']).any?
+        File.foreach('./supporting_documents/help.txt') do |line|
+            puts  line
+        end
+        exit
+    when (parse & ['-a', '--about']).any?
+        File.foreach('./supporting_documents/about.txt') do |line|
+            puts line
+        end
+        exit
+    when (parse & ['-g', '--gems']).any?
+        File.foreach('./Gemfile') do |line|
+            puts line
+        end
+        exit
+    end
+end
+
 
 class Selections
     attr_reader :prompt, :font, :font_two, :pastel
@@ -42,6 +51,8 @@ class Selections
             main.choice "Select a Scale", -> { select_scale }
             main.choice "Edit a File", -> { edit }
             main.choice "Delete a File", -> { delete }
+            main.choice "Help", -> { help }
+            main.choice "About", -> { about }
             main.choice "Exit", -> { exit_program }
         end
     end
@@ -62,14 +73,14 @@ class Selections
         puts `clear`
         puts @pastel.green(@font_two.write("Major Scale"))
         puts @pastel.green("-" * 73)
-        puts "You have selected the Major Scale.".green
-        puts "(If you can't see the note you're after, keep pressing the down-arrow!)".green
+        puts @pastel.green("You have selected the Major Scale.")
+        puts @pastel.green("(If you can't see the note you're after, keep pressing the down-arrow!)")
         @note = @prompt.select("Please choose a note:", all_notes, "Back to Main", filter: true)
         if @note == "Back to Main"
             main
         else
             @note = MajorScale.new(@note)
-            puts "Your scale is:".green
+            puts @pastel.green("Your scale is:")
             puts note.major_scale
             @new_scale << @note.major_scale
             puts @pastel.green("-" * 73)
@@ -81,14 +92,14 @@ class Selections
         puts `clear`
         puts @pastel.yellow(@font_two.write("Harmonic Minor"))
         puts @pastel.yellow("-" * 99)
-        puts @pastel.yellow("You have selected the Harmonic Minor Scale.".yellow)
+        puts @pastel.yellow("You have selected the Harmonic Minor Scale.")
         puts @pastel.yellow("(If you can't see the note you're after, keep pressing the down-arrow!)")
         @note = @prompt.select("Please choose a note:", all_notes, "Back to Main", filter: true)
         if @note == "Back to Main"
             main
         else
             @note = HarmonicMinorScale.new(@note)
-            puts "Your scale is:".yellow
+            puts @pastel.yellow("Your scale is:")
             puts @note.harmonic_minor_scale
             @new_scale << @note.harmonic_minor_scale
             puts @pastel.yellow("-" * 99)
@@ -116,19 +127,20 @@ class Selections
     end
 
     def save_yes
-        answer = @prompt.select("Would you like to create a save file based on your array?", %w(yes no))
+        answer = @prompt.select("Would you like to create a save file based on your Scale?", %w(yes no))
         if answer == "yes"
             savefile
         else
+            prompt.keypress("Press space or enter when you're ready to return to the main-menu.", keys: [:space, :return])
             main
         end
     end
 
     def savefile
-        @filename = @prompt.ask("What would you like to call your file?")
+        @filename = @prompt.ask("What would you like to call your file?", required: true)
         while File.exist?("./new_file/#{@filename}.txt")
             puts "This file name is already in use!"
-            @filename = @prompt.ask("What would you like to call your file?")
+            @filename = @prompt.ask("What would you like to call your file?", required: true)
         end
         @progression = @prompt.ask("Add some notes separated by a comma.") do |q|
             q.convert -> (input) { input.split(/,\s*/) }
@@ -146,7 +158,7 @@ class Selections
         @show_files = @prompt.select("Which File would you like to Edit?", Dir.glob("./new_file/**/*.txt"), "Back to Main")
         if @show_files == "Back to Main" then main
         else
-            puts @pastel.yellow("Your current notes are: " + File.read(@show_files.to_s))
+            puts @pastel.yellow("Your current notes are: " + File.read(@show_files))
             change = @prompt.ask("Over-write your file. If you wish to keep old notes be sure to write them back in!") do |q|
                 q.convert -> (input) { input.split(/,\s*/) }
             end
@@ -171,12 +183,28 @@ class Selections
         end
     end
 
+    def help
+        File.foreach('./supporting_documents/help.txt') do |line|
+            puts  line
+        end
+        prompt.keypress("Press space or enter when you're ready to return to the main-menu.", keys: [:space, :return])
+        main
+    end
+
+    def about
+        File.foreach('./supporting_documents/about.txt') do |line|
+            puts  line
+        end
+        prompt.keypress("Press space or enter when you're ready to return to the main-menu.", keys: [:space, :return])
+        main
+    end
+
     def exit_program
-        puts pastel.red("---")
+        puts @pastel.red("---")
         sleep(0.5)
-        puts pastel.red("---")
+        puts @pastel.red("---")
         sleep(0.5)
-        puts pastel.red("---")
+        puts @pastel.red("---")
         sleep(0.5)
         puts pastel.red("--->")
         puts @pastel.red(@font_two.write("Goodbye"))

@@ -1,0 +1,10 @@
+About Terminal Music
+This app was designed for beginner musicians (such as myself) to easily access popular scales related to any given note.
+Ever forgotten a fifth? Don't want to get the note chart out and start 'hopping'? Ever forgotten the Blues interval progression?
+Well, this app is for you.
+Ever sit looking at a scale and playing through the notes and think to yourself "This sound is fire, I have to remember this!"
+Then the next day you're trying to play it and can't remember a danged thing.
+I've got you covered. With the save and edit features you can choose to save your progressions for later use in song-writing or just playing that sound you enjoy.
+This software is open source and free to download and use.
+Enjoy!
+
