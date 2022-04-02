@@ -1,5 +1,5 @@
 require "./scale_finder"
-require "./save_scale"
+require "./app"
 
 # app will show scales related to notes
 describe natural_notes do

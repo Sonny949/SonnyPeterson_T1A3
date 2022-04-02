@@ -5,14 +5,6 @@ require 'colorize'
 require 'optparse'
 require_relative './scale_finder'
 
-# puts "Hello world"
-
-# music = MusicApp.new
-
-# music.welcome
-
-# music.display_scales
-
 # options = {}
 # OptionParser.new do |parser|
 #     parser.on("-n", "--name NAME", "The name of the person") do |value|
@@ -24,6 +16,7 @@ require_relative './scale_finder'
 #     else
 #         puts 'hello stranger'
 #     end
+
 class Selections
     attr_reader :prompt, :font, :font_two, :pastel
     attr_accessor :note, :new_scale, :filename, :progression, :show_files
@@ -36,7 +29,7 @@ class Selections
         @note = note
         @filename = filename
         @show_files = show_files
-        @@new_scale = []
+        @new_scale = []
     end
 
     def main
@@ -57,7 +50,7 @@ class Selections
         puts `clear`
         puts @pastel.red(@font_two.write("Scale Select"))
         puts @pastel.red("-" * 73)
-        @prompt.select("To get started, please choose a scale.") do |menu|
+        @prompt.select("Please choose a scale.") do |menu|
             menu.choice "Major", -> { major }
             menu.choice "Harmonic Minor", -> { minor }
             menu.choice "Blues", -> { blues }
@@ -71,13 +64,17 @@ class Selections
         puts @pastel.green("-" * 73)
         puts "You have selected the Major Scale.".green
         puts "(If you can't see the note you're after, keep pressing the down-arrow!)".green
-        @note = @prompt.select("Please choose a note:", all_notes)
-        @note = MajorScale.new(@note)
-        puts "Your scale is:".green
-        puts note.major_scale
-        @@new_scale << @note.major_scale
-        puts "-" * 61
-        save_yes
+        @note = @prompt.select("Please choose a note:", all_notes, "Back to Main", filter: true)
+        if @note == "Back to Main"
+            main
+        else
+            @note = MajorScale.new(@note)
+            puts "Your scale is:".green
+            puts note.major_scale
+            @new_scale << @note.major_scale
+            puts @pastel.green("-" * 73)
+            save_yes
+        end
     end
 
     def minor
@@ -86,13 +83,17 @@ class Selections
         puts @pastel.yellow("-" * 99)
         puts @pastel.yellow("You have selected the Harmonic Minor Scale.".yellow)
         puts @pastel.yellow("(If you can't see the note you're after, keep pressing the down-arrow!)")
-        @note = @prompt.select("Please choose a note:", all_notes)
-        @note = HarmonicMinorScale.new(@note)
-        puts "Your scale is:".yellow
-        puts @note.harmonic_minor_scale
-        @@new_scale << @note.harmonic_minor_scale
-        puts "-" * 61
-        save_yes
+        @note = @prompt.select("Please choose a note:", all_notes, "Back to Main", filter: true)
+        if @note == "Back to Main"
+            main
+        else
+            @note = HarmonicMinorScale.new(@note)
+            puts "Your scale is:".yellow
+            puts @note.harmonic_minor_scale
+            @new_scale << @note.harmonic_minor_scale
+            puts @pastel.yellow("-" * 99)
+            save_yes
+        end
     end
 
     def blues
@@ -101,13 +102,17 @@ class Selections
         puts @pastel.blue("-" * 68)
         puts @pastel.blue("You have selected the Blues Scale.")
         puts @pastel.blue("(If you can't see the note you're after, keep pressing the down-arrow!)")
-        @note = @prompt.select("Please choose a note:", all_notes)
-        @note = BluesScale.new(@note)
-        puts @pastel.blue("Your scale is:")
-        puts note.blues_scale
-        @@new_scale << @note.blues_scale
-        puts "-" * 61
-        save_yes
+        @note = @prompt.select("Please choose a note:", all_notes, "Back to Main", filter: true)
+        if @note == "Back to Main"
+            main
+        else
+            @note = BluesScale.new(@note)
+            puts @pastel.blue("Your scale is:")
+            puts note.blues_scale
+            @new_scale << @note.blues_scale
+            puts @pastel.blue("-" * 68)
+            save_yes
+        end
     end
 
     def save_yes
@@ -126,7 +131,7 @@ class Selections
             @filename = @prompt.ask("What would you like to call your file?")
         end
         @progression = @prompt.ask("Add some notes separated by a comma.") do |q|
-            q.convert -> (input) { input.split(/,\s*/) }            
+            q.convert -> (input) { input.split(/,\s*/) }
         end
         @filename = File.write("./new_file/#{@filename}.txt", @progression)
         puts "Your file has been saved!"
@@ -141,7 +146,7 @@ class Selections
         @show_files = @prompt.select("Which File would you like to Edit?", Dir.glob("./new_file/**/*.txt"), "Back to Main")
         if @show_files == "Back to Main" then main
         else
-            puts @pastel.yellow("Your current notes are: " + File.read(@show_files))
+            puts @pastel.yellow("Your current notes are: " + File.read(@show_files.to_s))
             change = @prompt.ask("Over-write your file. If you wish to keep old notes be sure to write them back in!") do |q|
                 q.convert -> (input) { input.split(/,\s*/) }
             end
@@ -166,8 +171,14 @@ class Selections
         end
     end
 
-
     def exit_program
+        puts pastel.red("---")
+        sleep(0.5)
+        puts pastel.red("---")
+        sleep(0.5)
+        puts pastel.red("---")
+        sleep(0.5)
+        puts pastel.red("--->")
         puts @pastel.red(@font_two.write("Goodbye"))
         puts @pastel.red("-" * 55)
         sleep(2)
@@ -176,5 +187,13 @@ class Selections
 end
 
 music = Selections.new
-music.main
 
+begin
+    music.main
+rescue Interrupt
+    puts "\n"
+    music.exit_program
+rescue StandardError => e
+    puts "An unexpected error occurred"
+    p e.message
+end
