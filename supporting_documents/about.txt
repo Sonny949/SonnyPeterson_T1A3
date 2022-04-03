@@ -6,5 +6,13 @@ Ever sit looking at a scale and playing through the notes and think to yourself 
 Then the next day you're trying to play it and can't remember a danged thing.
 I've got you covered. With the save and edit features you can choose to save your progressions for later use in song-writing or just playing that sound you enjoy.
 This software is open source and free to download and use.
+
+This app is available to anyone that wants to use it.
+There is no login. All files are available to all users. I like it this way.
+That means I can look at combinations made by others and play them. So can you.
+There is a lot of trust involved in this. Please don't wreck files made by others. Make your own instead!
+But also, it's a good idea to make copies of your files if you like them. Check the help docs for more info on this.
+
+If there are any other scales you wish to see, let me know. But I will be adding scales as I encounter them in the wild anyway.
 Enjoy!
 
