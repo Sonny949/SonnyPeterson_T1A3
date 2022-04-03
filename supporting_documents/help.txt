@@ -15,6 +15,9 @@ If you think I'm being funny and have missed out some notes from D onwards, don'
 They're there, I promise you. Along with an option to return to the main menu.
 Just keep pressing the down key.
 Otherwise you can enter the note that you want on the keyboard to filter results. If you change your mind press backspace.
+If you choose the `no` option when propmted whether or not you'd like to create a save file, the program will freeze on the scale you're on.
+This is so you can continue to study the scale or play some notes on your instrument as you wish.
+When you're done, press enter/return or space and you will be brought back to the main menu.
 
 There are two options within the app that you will have to type your own text in (you've got this, I believe in you.)
 
@@ -22,7 +25,7 @@ There are two options within the app that you will have to type your own text in
     You're your own person and I won't tell you how to name your file. But I will give you some tips.
     Use snake_case or kebab-case to save your files and steer clear of numbers.
     This is only to help you if you want to use your file outside of Terminal music.
-    I WOULD STRONGLY SUGGEST MAKING YOUR OWN COPIES OF YOUR FILE IF YOU WANT TO KEEP IT.
+    I WOULD STRONGLY SUGGEST MAKING YOUR OWN COPIES OF YOUR FILE IF YOU WISH TO KEEP IT.
     To do this, navigate to the src/new_file folder of the app data.
     type cp {filename} {path you wish to save to}
 
@@ -38,9 +41,13 @@ There are two options within the app that you will have to type your own text in
     This will help with music writing apps such as muse.
     If you wish, you may save timing notation in between notes.
 
-You can exit the program at any time by pressing ctrl+c.
+You can exit the program at any time by pressing ctrl + c. (cmd + c on mac)
 
-Edit/Delete - If you cannot see a file highlighted in green for either of these options, chances are it's not there
+Edit/Delete - If you cannot see a file highlighted in green for either of these options, 
+it has been deleted or the filepath has been corrupted.
+
+Edit - If you wish to retain anything from the previous scale, either copy it back in or type it back in.
+Typing is probably safer.
 
 Please read the instructions carefully for each part of the program.
 If they are unclear please let me know and I will change them or explain them.

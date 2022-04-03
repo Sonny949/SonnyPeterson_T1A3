@@ -1,5 +1,5 @@
 About Terminal Music
-This app was designed for beginner musicians (such as myself) to easily access popular scales related to any given note.
+This app was designed for beginner musicians (such as myself) to easily access popular scales related to any given note, and save note progressions based on their scale.
 Ever forgotten a fifth? Don't want to get the note chart out and start 'hopping'? Ever forgotten the Blues interval progression?
 Well, this app is for you.
 Ever sit looking at a scale and playing through the notes and think to yourself "This sound is fire, I have to remember this!"
@@ -13,6 +13,5 @@ That means I can look at combinations made by others and play them. So can you.
 There is a lot of trust involved in this. Please don't wreck files made by others. Make your own instead!
 But also, it's a good idea to make copies of your files if you like them. Check the help docs for more info on this.
 
-If there are any other scales you wish to see, let me know. But I will be adding scales as I encounter them in the wild anyway.
+If there are any other scales you wish to see added, let me know. But I will be adding scales I like as I encounter them in the wild anyway.
 Enjoy!
-
