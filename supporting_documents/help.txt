@@ -24,6 +24,7 @@ There are two options within the app that you will have to type your own text in
     Save - In the save feature you will be asked to input a name for your file. 
     You're your own person and I won't tell you how to name your file. But I will give you some tips.
     Use snake_case or kebab-case to save your files and steer clear of numbers.
+    I would suggest to name your file after the scale it is utilising. e.g minor_c.
     This is only to help you if you want to use your file outside of Terminal music.
     I WOULD STRONGLY SUGGEST MAKING YOUR OWN COPIES OF YOUR FILE IF YOU WISH TO KEEP IT.
     To do this, navigate to the src/new_file folder of the app data.

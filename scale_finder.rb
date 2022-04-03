@@ -7,16 +7,16 @@ end
 # define sharps/flats
 def all_notes
   every_note = []
-    natural_notes.each do |note|
+  natural_notes.each do |note|
       every_note << note
-      every_note << "#{note}#" unless note == "B" or note == "E"
-    end
+      every_note << "#{note}#" unless note == "B" || note == "E"
+  end
   return every_note
 end
 # puts natural_notes
 # puts all_notes
 
-# we will have three Scales, this master-class will define common variables. w stands for whole step, h stands for half- 
+# we will have three Scales, this master-class will define common variables. w stands for whole step, h stands for half-
 # step. I didn't use a special notation for 3 half steps because in music theory it is always noted as whole + half
 class Scale
   attr_reader :root
@@ -26,11 +26,11 @@ class Scale
   end
 
   def w
-    w = 2
+    2
   end
 
   def h
-    h = 1
+    1
   end
 end
 
@@ -51,7 +51,7 @@ class MajorScale < Scale
         note_index = 0 if all_notes[note_index].nil?
       end
     end
-  return major_scale
+    return major_scale
   end
 end
 

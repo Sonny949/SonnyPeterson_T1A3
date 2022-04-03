@@ -14,6 +14,7 @@ describe all_notes do
   end
 end
 
+# Following four tests are for the Scale class and its subclasses
 describe Scale do
   it "creates an instance of scale class" do
   c = Scale.new("C")
@@ -21,6 +22,7 @@ describe Scale do
   end
 end
 
+# test to confirm the scale class creation and a test to confirm desired output of the method
 describe MajorScale do
   it "returns scale based on root note" do
     c = MajorScale.new("C")
@@ -29,10 +31,18 @@ describe MajorScale do
   end
 end
 
-describe SaveScale do
-  it "saves notes to an array" do
-    c = SaveScale.new
-    c.add_note("C")
-    expect(c.add_notes[0]).to eq("C")
+describe HarmonicMinorScale do
+  it "returns scale based on root note" do
+    c = HarmonicMinorScale.new("C")
+    expect(c).to be_kind_of(HarmonicMinorScale)
+    expect(c.harmonic_minor_scale[5]).to eq("G#")
+  end
+end
+
+describe BluesScale do
+  it "returns scale based on root note" do
+    c = BluesScale.new("C")
+    expect(c).to be_kind_of(BluesScale)
+    expect(c.blues_scale[3]).to eq("F#")
   end
 end
